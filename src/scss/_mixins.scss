@@ -1,0 +1,47 @@
+@mixin icon-mask($image, $width: 25px, $height: 25px, $color: var(--black)) {
+  width: $width;
+  height: $height;
+  mask-image: url("@/assets/icons/#{$image}.svg");
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  background-color: $color;
+}
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+
+  &:-moz-placeholder {
+    @content;
+  }
+
+  &::-moz-placeholder {
+    @content;
+  }
+
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+@mixin app-h1 {
+  @extend .app-h1;
+}
+@mixin app-h2 {
+  @extend .app-h2;
+}
+@mixin app-h3 {
+  @extend .app-h3;
+}
+@mixin app-h4 {
+  @extend .app-h4;
+}
+@mixin app-h5 {
+  @extend .app-h5;
+}
+@mixin app-body-1 {
+  @extend .app-body-1;
+}
+@mixin app-body-2 {
+  @extend .app-body-2;
+}

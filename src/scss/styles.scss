@@ -1,9 +1,15 @@
 @import "normalize";
+@import "mixins";
 
 html, body, #app {
   height: 100%;
+  font-family: "Roboto", sans-serif;
 }
 
 body.no-scroll {
   overflow: hidden;
+}
+
+p {
+  margin: 0;
 }
