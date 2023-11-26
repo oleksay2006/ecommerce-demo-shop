@@ -1,15 +1,33 @@
 <template lang="pug">
-.page__wrapper
+section.page__wrapper
   .page
-    .page__text-wrapper
-      p.page__title Collections
-      p.page__text You can explore ans shop many different collection
-      p.page__text from various barands here.
-    img.page__main-image(src="@/assets/images/main-image.png")
+    transition(name="fade", mode="out-in", appear)
+      .page__text-wrapper
+        p.page__title Collections
+        p.page__text You can explore ans shop many different collection
+        p.page__text from various barands here.
+    transition(name="slide", mode="out-in", appear)
+      img.page__main-image(src="@/assets/images/main-image.png")
   img.page__decoration--left(src="@/assets/icons/main-page-left.svg")
   img.page__decoration--right(src="@/assets/icons/main-page-right.svg")
 </template>
 <style lang="scss" scoped>
+.slide-enter-from {
+  transform: translateX(30px);
+}
+
+.slide-enter-active {
+  transition: all 1s ease;
+}
+
+.fade-enter-from {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  transition: all 2s ease;
+}
+
 .page {
   width: 75%;
   margin-left: auto;

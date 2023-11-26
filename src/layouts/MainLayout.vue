@@ -1,8 +1,8 @@
 <template lang="pug">
 .main-layout
   app-header
-  .navbar__wrapper
-    nav.navbar
+  nav.navbar__wrapper
+    .navbar
       p Jewelry & Accessories
       p Clothing & Shoes
       p Home & Living

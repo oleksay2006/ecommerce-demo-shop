@@ -1,5 +1,5 @@
 <template lang="pug">
-.landing-wrapper
+main.landing-wrapper
   first-page
   shop-page
 </template>

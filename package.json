@@ -70,7 +70,21 @@
       "plugin:prettier/recommended"
     ],
     "parserOptions": {
-      "ecmaVersion": 2020
+      "parser": {
+        "ts": "@typescript-eslint/parser"
+      },
+      "vueFeatures": {
+        "filter": true,
+        "interpolationAsNonHTML": true,
+        "styleCSSVariableInjection": true
+      },
+      "sourceType": "module",
+      "ecmaVersion": 2020,
+      "ecmaFeatures": {
+        "globalReturn": false,
+        "impliedStrict": false,
+        "jsx": false
+      }
     },
     "rules": {},
     "overrides": [
