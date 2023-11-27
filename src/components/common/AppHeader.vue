@@ -2,15 +2,28 @@
 header.header__wrapper
   .header
     .header__search-icon-wrapper
-      .header__search-icon
+      .header__search-icon(
+        v-if="!isOpenSearchOverlay",
+        @click="toggleSearchOverlay"
+      )
     img.header__logo(src="@/assets/icons/logo.svg", alt="logo")
     .header__cart-and-user
       p.header__user Account
       p.header__cart Shoping
       .header__cart-numbers
         p 2
+  dynamic-search(:is-open="isOpenSearchOverlay", @close="toggleSearchOverlay")
 </template>
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import DynamicSearch from "@/components/DynamicSearch.vue";
+import { ref } from "vue";
+
+const isOpenSearchOverlay = ref<boolean>(false);
+
+const toggleSearchOverlay = () => {
+  isOpenSearchOverlay.value = !isOpenSearchOverlay.value;
+};
+</script>
 <style scoped lang="scss">
 .header {
   width: 75%;
@@ -79,6 +92,7 @@ header.header__wrapper
 
   &__search-icon {
     @include icon-mask("search");
+    cursor: pointer;
 
     &-wrapper {
       width: 20%;

@@ -2,12 +2,12 @@
 section.page__wrapper
   .page
     transition(name="fade", mode="out-in", appear)
-      .page__text-wrapper
+      .page__text-wrapper(v-if="true")
         p.page__title Collections
         p.page__text You can explore ans shop many different collection
         p.page__text from various barands here.
     transition(name="slide", mode="out-in", appear)
-      img.page__main-image(src="@/assets/images/main-image.png")
+      img.page__main-image(v-if="true", src="@/assets/images/main-image.png")
   img.page__decoration--left(src="@/assets/icons/main-page-left.svg")
   img.page__decoration--right(src="@/assets/icons/main-page-right.svg")
 </template>

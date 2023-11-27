@@ -12,6 +12,9 @@ html, body, #app {
 
 body.no-scroll {
   overflow: hidden;
+  position: fixed;
+  width: 100vw;
+  height: 100%;
 }
 
 p {

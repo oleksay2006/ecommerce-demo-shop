@@ -7,7 +7,7 @@ section.page__wrapper
       p.page__filters-item Hoodies
       p.page__filters-item Jacket
     .page__list
-      .list__item-wrapper(v-for="product in products")
+      .list__item-wrapper(v-for="product in products", :key="product.title")
         .list__item-sale(v-if="product.isOnSale") SALE
         .list__item-hot(v-if="product.isHot") HOT
         img.list__item-image(:src="getImage(product.imgName)")
