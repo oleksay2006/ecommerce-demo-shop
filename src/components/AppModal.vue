@@ -2,39 +2,48 @@
 teleport(to="body")
   transition(name="fade")
     .modal(v-if="isOpen")
-      .modal--backdrop(@click="close")
-      .modal--container
-        .modal--wrapper
-          .modal--close(@click="close")
-          slot(name="content")
+      .modal__backdrop(@click="close")
+      .modal__container
+        slot
 </template>
-
 <script lang="ts" setup>
-import { defineEmits, defineProps, onBeforeUnmount } from "vue";
-import useDisableScroll from "@/features/useDisableScroll";
+import { onBeforeUnmount, watch } from "vue";
 
 const emit = defineEmits(["close", "submit"]);
 const props = defineProps({
   isOpen: { type: Boolean, default: false },
 });
 
-function close() {
+const close = () => {
   emit("close");
-}
+};
 
 const keyPress = (event: KeyboardEvent) => {
   if (event && event.code === "Escape") {
     close();
   }
 };
-useDisableScroll();
+
 document.addEventListener("keydown", keyPress);
 
 onBeforeUnmount(() => {
   document.removeEventListener("keydown", keyPress);
 });
-</script>
 
+watch(
+  () => props.isOpen,
+  (newV) => {
+    if (newV) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+  },
+  {
+    immediate: true,
+  }
+);
+</script>
 <style lang="scss" scoped>
 .modal {
   width: 100%;
@@ -44,42 +53,38 @@ onBeforeUnmount(() => {
   left: 0;
   z-index: 10;
   display: flex;
-  justify-content: center;
-  align-items: center;
 
-  &--backdrop {
+  &__backdrop {
     width: 100%;
     height: 100%;
     position: absolute;
-    background-color: #000000;
+    background-color: var(--black);
     top: 0;
     left: 0;
-    opacity: 0.4;
+    opacity: 0.8;
   }
 
-  &--container {
-    max-height: 100%;
+  &__container {
+    width: 100%;
+    max-height: calc(100% - 20px);
     overflow-y: auto;
-    padding: 10px;
     z-index: 11;
   }
 
-  &--wrapper {
+  &__wrapper {
     position: relative;
-    background-color: #ffffff;
+    background-color: var(--white);
     border-radius: 12px;
     padding: 10px;
   }
 
-  &--close {
+  &__close {
     position: absolute;
     top: 24px;
-    right: 24px;
+    right: 40px;
     z-index: 9;
-  }
-
-  &--loader {
-    top: calc(50% - 90px);
+    display: flex;
+    cursor: pointer;
   }
 }
 
