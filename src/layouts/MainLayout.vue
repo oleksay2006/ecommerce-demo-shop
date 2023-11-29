@@ -1,6 +1,6 @@
 <template lang="pug">
 .main-layout
-  app-header
+  landing-header
   nav.navbar__wrapper
     .navbar
       p Jewelry & Accessories
@@ -14,9 +14,11 @@
     router-view(v-slot="{ Component }")
       transition(name="fade", mode="out-in")
         component(:is="Component")
+  app-footer
 </template>
 <script lang="ts" setup>
-import AppHeader from "@/components/common/AppHeader.vue";
+import LandingHeader from "@/components/LandingHeader.vue";
+import AppFooter from "@/components/common/AppFooter.vue";
 </script>
 <style lang="scss" scoped>
 .fade-enter-active,

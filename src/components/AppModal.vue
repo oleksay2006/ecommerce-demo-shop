@@ -53,6 +53,7 @@ watch(
   left: 0;
   z-index: 10;
   display: flex;
+  justify-content: center;
 
   &__backdrop {
     width: 100%;
@@ -65,8 +66,7 @@ watch(
   }
 
   &__container {
-    width: 100%;
-    max-height: calc(100% - 20px);
+    width: 75%;
     overflow-y: auto;
     z-index: 11;
   }

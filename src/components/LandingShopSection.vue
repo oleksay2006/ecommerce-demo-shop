@@ -1,16 +1,20 @@
 <template lang="pug">
 section.page__wrapper
   .page
-    .page__filters
+    .page__filters(role="filters")
       p.page__filters-item--active All Products
       p.page__filters-item T-Shirt
       p.page__filters-item Hoodies
       p.page__filters-item Jacket
     .page__list
-      .list__item-wrapper(v-for="product in products", :key="product.title")
-        .list__item-sale(v-if="product.isOnSale") SALE
-        .list__item-hot(v-if="product.isHot") HOT
-        img.list__item-image(:src="getImage(product.imgName)")
+      .list__item-wrapper(
+        v-for="product in productsList",
+        :key="product.title"
+      )
+        span.list__item-sale(v-if="product.isOnSale") SALE
+        span.list__item-hot(v-if="product.isHot") HOT
+        figure
+          img.list__item-image(:src="getImage(product.imgName)")
         .hover-block
           .hover-block__icons
             .hover-block__favourite
@@ -19,49 +23,15 @@ section.page__wrapper
             .hover-block__cart
             p.hover-block__shop-text Shop Now
         .list__item-text_wrapper
-          .list__item-text_title {{ product.title }}
+          h3.list__item-text_title {{ product.title }}
           .list__item-text_bottom
             p.list__item-text--gray {{ product.type }}
             p.list__item-text_price {{ product.price }}
 </template>
 <script lang="ts" setup>
-import { ref } from "vue";
+import { useProductsStore } from "@/store/productsStore";
 
-const products = ref([
-  {
-    title: "Adicolor Classics Joggers",
-    imgName: "image-product-1",
-    type: "Dress",
-    price: "$63.85",
-    isOnSale: false,
-    isHot: false,
-  },
-  {
-    title: "Adicolor Classics Joggers",
-    imgName: "image-product-2",
-    type: "Dress",
-    price: "$63.85",
-    isOnSale: false,
-    isHot: false,
-  },
-  {
-    title: "Adicolor Classics Joggers",
-    imgName: "image-product-3",
-    type: "Dress",
-    price: "$63.85",
-    discount: "20%",
-    isOnSale: true,
-    isHot: false,
-  },
-  {
-    title: "Adicolor Classics Joggers",
-    imgName: "image-product-4",
-    type: "Dress",
-    price: "$63.85",
-    isOnSale: false,
-    isHot: true,
-  },
-]);
+const { productsList } = useProductsStore();
 
 const getImage = (imgName: string) => {
   return require(`@/assets/images/${imgName}.png`);
@@ -139,6 +109,9 @@ const getImage = (imgName: string) => {
         font-size: 16px;
         font-weight: 600;
         margin-bottom: 16px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
 
       &_wrapper {

@@ -1,31 +1,32 @@
 <template lang="pug">
 section.page__wrapper
   .page
-    transition(name="fade", mode="out-in", appear)
-      .page__text-wrapper(v-if="true")
-        p.page__title Collections
-        p.page__text You can explore ans shop many different collection
-        p.page__text from various barands here.
-    transition(name="slide", mode="out-in", appear)
-      img.page__main-image(v-if="true", src="@/assets/images/main-image.png")
+    .page__text-wrapper
+      h1.page__title Collections
+      h2.page__text You can explore ans shop many different collection
+      h2.page__text from various barands here.
+    figure.page__main-image_wrapper
+      img.page__main-image(src="@/assets/images/main-image.png")
   img.page__decoration--left(src="@/assets/icons/main-page-left.svg")
   img.page__decoration--right(src="@/assets/icons/main-page-right.svg")
 </template>
 <style lang="scss" scoped>
-.slide-enter-from {
-  transform: translateX(30px);
+@keyframes slideLeft {
+  from {
+    transform: translateX(30px);
+  }
+  to {
+    transform: translateX(0px);
+  }
 }
 
-.slide-enter-active {
-  transition: all 1s ease;
-}
-
-.fade-enter-from {
-  opacity: 0;
-}
-
-.fade-enter-active {
-  transition: all 2s ease;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .page {
@@ -37,7 +38,13 @@ section.page__wrapper
   align-items: center;
 
   &__main-image {
-    width: 30%;
+    width: 100%;
+
+    &_wrapper {
+      animation-name: slideLeft;
+      animation-duration: 1s;
+      width: 30%;
+    }
   }
 
   &__decoration {
@@ -60,6 +67,11 @@ section.page__wrapper
     font-style: normal;
     font-weight: 400;
     line-height: 55px;
+
+    &-wrapper {
+      animation-name: fadeIn;
+      animation-duration: 1.5s;
+    }
   }
 
   &__title {

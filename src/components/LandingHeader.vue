@@ -3,6 +3,8 @@ header.header__wrapper
   .header
     .header__search-icon-wrapper
       .header__search-icon(
+        role="search",
+        aria-label="Search icon",
         v-if="!isOpenSearchOverlay",
         @click="toggleSearchOverlay"
       )

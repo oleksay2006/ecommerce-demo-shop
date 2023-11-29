@@ -1,11 +1,11 @@
 <template lang="pug">
 main.landing-wrapper
-  first-page
-  shop-page
+  landing-hero-section
+  landing-shop-section
 </template>
 <script lang="ts" setup>
-import FirstPage from "@/components/FirstPage.vue";
-import ShopPage from "@/components/ShopPage.vue";
+import LandingHeroSection from "@/components/LandingHeroSection.vue";
+import LandingShopSection from "@/components/LandingShopSection.vue";
 </script>
 <style scoped lang="scss">
 .landing-wrapper {
