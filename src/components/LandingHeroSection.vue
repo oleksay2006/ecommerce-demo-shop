@@ -96,7 +96,7 @@ section.page__wrapper
   &__wrapper {
     position: relative;
     width: 100%;
-    min-height: calc(100vh - 144px);
+    min-height: calc(100vh - 90px);
     background-color: #f4f4f5;
     display: flex;
     flex-direction: column;
