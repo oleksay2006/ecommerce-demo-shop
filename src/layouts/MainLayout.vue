@@ -1,15 +1,6 @@
 <template lang="pug">
 .main-layout
   landing-header
-  nav.navbar__wrapper
-    .navbar
-      p Jewelry & Accessories
-      p Clothing & Shoes
-      p Home & Living
-      p Wedding & Party
-      p Toys & Entertainment
-      p Art & Collectibles
-      p Craft Supplies & Tools
   .main-content
     router-view(v-slot="{ Component }")
       transition(name="fade", mode="out-in")

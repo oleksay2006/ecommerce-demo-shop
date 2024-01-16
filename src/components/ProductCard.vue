@@ -133,6 +133,9 @@ $width: $size/2;
       font-size: 18px;
       font-weight: 400;
       color: var(--white);
+      @media (max-width: 1400px) {
+        font-size: 15px;
+      }
     }
   }
 
@@ -221,6 +224,9 @@ $width: $size/2;
     @include icon-mask("search", 25px, 25px, var(--white));
     margin-left: 46px;
     cursor: pointer;
+    @media (max-width: 1400px) {
+      margin-left: 35px;
+    }
   }
 
   &__cart {

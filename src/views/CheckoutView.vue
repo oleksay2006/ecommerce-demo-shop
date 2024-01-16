@@ -63,6 +63,12 @@ const applyCoupon = () => {
     border: 1px solid #e3e3e3;
     padding: 15px;
     height: max-content;
+    @media (max-width: 1600px) {
+      width: 50%;
+    }
+    @media (max-width: 1350px) {
+      width: 60%;
+    }
   }
 }
 
@@ -70,6 +76,12 @@ const applyCoupon = () => {
   &__wrapper {
     @extend .items-wrapper;
     width: 25%;
+    @media (max-width: 1600px) {
+      width: 30%;
+    }
+    @media (max-width: 1400px) {
+      width: 35%;
+    }
   }
 }
 

@@ -31,6 +31,8 @@ section.page__wrapper
 
 .page {
   width: 75%;
+  padding-top: 50px;
+  padding-bottom: 50px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -44,6 +46,9 @@ section.page__wrapper
       animation-name: slideLeft;
       animation-duration: 1s;
       width: 30%;
+      @media (max-width: 1400px) {
+        width: 40%;
+      }
     }
   }
 
@@ -67,6 +72,10 @@ section.page__wrapper
     font-style: normal;
     font-weight: 400;
     line-height: 45px;
+    @media (max-width: 1400px) {
+      font-size: 20px;
+      line-height: 30px;
+    }
 
     &-wrapper {
       animation-name: fadeIn;
@@ -79,6 +88,9 @@ section.page__wrapper
     font-weight: 300;
     line-height: 55px;
     margin-bottom: 52px;
+    @media (max-width: 1400px) {
+      font-size: 64px;
+    }
   }
 
   &__wrapper {
