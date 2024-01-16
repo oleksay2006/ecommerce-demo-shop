@@ -19,10 +19,9 @@ html, body, #app {
 }
 
 body.no-scroll {
-  overflow: hidden;
-  position: fixed;
-  width: 100vw;
+  margin: 0;
   height: 100%;
+  overflow: hidden;
 }
 
 p {

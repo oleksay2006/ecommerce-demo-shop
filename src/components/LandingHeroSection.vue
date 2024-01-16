@@ -3,8 +3,8 @@ section.page__wrapper
   .page
     .page__text-wrapper
       h1.page__title Collections
-      h2.page__text You can explore ans shop many different collection
-      h2.page__text from various barands here.
+      h2.page__text You can explore my demo shop
+      h2.page__text And left your reviews on my GitHub
     figure.page__main-image_wrapper
       img.page__main-image(src="@/assets/images/main-image.png")
   img.page__decoration--left(src="@/assets/icons/main-page-left.svg")
@@ -66,7 +66,7 @@ section.page__wrapper
     font-size: 25px;
     font-style: normal;
     font-weight: 400;
-    line-height: 55px;
+    line-height: 45px;
 
     &-wrapper {
       animation-name: fadeIn;

@@ -1,18 +1,22 @@
 <template lang="pug">
-teleport(to="body")
-  transition(name="fade")
-    .modal(v-if="isOpen")
-      .modal__backdrop(@click="close")
-      .modal__container
-        slot
+transition(name="fade")
+  .gallery(v-if="isOpen")
+    .gallery__backdrop
+    .gallery__container
+      img(
+        ref="imageRef",
+        :src="require(`@/assets/images/${imgName}.png`)",
+        alt="Product Preview"
+      )
 </template>
 <script lang="ts" setup>
-import { watch } from "vue";
+import { ref, watch } from "vue";
+import { onClickOutside } from "@vueuse/core";
 
 interface IProps {
   isOpen: boolean;
+  imgName: string;
 }
-
 interface Emits {
   (e: "close"): void;
 }
@@ -20,10 +24,14 @@ interface Emits {
 const emits = defineEmits<Emits>();
 const props = withDefaults(defineProps<IProps>(), {
   isOpen: false,
+  imgName: "",
 });
+const imageRef = ref(null);
+
 const close = () => {
   emits("close");
 };
+onClickOutside(imageRef, () => close());
 
 watch(
   () => props.isOpen,
@@ -40,7 +48,7 @@ watch(
 );
 </script>
 <style lang="scss" scoped>
-.modal {
+.gallery {
   width: 100%;
   height: 100%;
   position: fixed;
@@ -61,8 +69,10 @@ watch(
   }
 
   &__container {
-    width: 75%;
     overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     z-index: 11;
   }
 

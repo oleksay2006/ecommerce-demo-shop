@@ -44,7 +44,7 @@ import AppFooter from "@/components/common/AppFooter.vue";
   justify-content: space-between;
 
   &__wrapper {
-    padding-top: 30px;
+    padding: 30px 0;
     background-color: rgba(30, 40, 50, 0.05);
   }
 

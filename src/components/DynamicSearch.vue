@@ -14,20 +14,13 @@ app-modal(:is-open="isOpen", @close="close")
     )
       p We can't find anything for your request
     .overlay__products-wrapper(v-else)
-      .overlay__product(
-        v-for="(product, index) in productsFromSearch",
-        :key="index"
+      product-card(
+        v-for="product in productsFromSearch",
+        :key="product.id",
+        :product="product",
+        :is-overlay="true",
+        @add-to-cart="addToCart"
       )
-        figure
-          img.product__image(
-            :src="getImage(product.imgName)",
-            alt="Product image"
-          )
-        .product__text-wrapper
-          h3.product__text-title {{ product.title }}
-          .product__text-category-and-price
-            p.product__text-category {{ product.type }}
-            p.product__text-price {{ product.price }}
 </template>
 <script lang="ts" setup>
 import { ref, watch } from "vue";
@@ -35,6 +28,7 @@ import AppModal from "@/components/AppModal.vue";
 import type { IProduct } from "@/types/entities/IProduct";
 import { useDebounceFn } from "@vueuse/core";
 import { useProductsStore } from "@/store/productsStore";
+import ProductCard from "@/components/ProductCard.vue";
 
 interface Props {
   isOpen: boolean;
@@ -48,22 +42,19 @@ withDefaults(defineProps<Props>(), {
   isOpen: false,
 });
 const emits = defineEmits<Emits>();
-const { productsList } = useProductsStore();
+const { productsList, addToCart } = useProductsStore();
 const productsFromSearch = ref<IProduct[]>(productsList);
 const searchValue = ref<string>("");
 
 const close = (): void => {
   emits("close");
 };
-const getImage = (imgName: string) => {
-  return require(`@/assets/images/${imgName}.png`);
-};
-
 const debouncedFn = useDebounceFn((searchValue: string) => {
   productsFromSearch.value = productsList.filter((product) =>
     product.title.includes(searchValue)
   );
 }, 500);
+
 watch(
   () => searchValue.value,
   (newV) => {
@@ -83,13 +74,6 @@ watch(
       justify-content: space-between;
     }
 
-    &-title {
-      margin-bottom: 16px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
     &-wrapper {
       font-family: "Open Sans", sans-serif;
       font-size: 16px;
@@ -105,6 +89,17 @@ watch(
   }
 }
 
+.card {
+  &__wrapper {
+    min-width: 20%;
+    max-width: 20%;
+    color: var(--white);
+  }
+}
+::v-deep(.card__text--gray) {
+  color: var(--white);
+}
+
 .overlay {
   &__empty-search {
     margin-top: 15%;
@@ -114,11 +109,6 @@ watch(
     display: flex;
     justify-content: center;
     color: var(--white);
-  }
-
-  &__product {
-    min-width: 25%;
-    max-width: 25%;
   }
 
   &__input {
@@ -131,10 +121,10 @@ watch(
   }
 
   &__products-wrapper {
-    padding-bottom: 40px;
+    padding-bottom: 20px;
     overflow-y: hidden;
     overflow-x: auto;
-    margin-top: 78px;
+    margin-top: 40px;
     display: flex;
     justify-content: space-between;
     gap: 24px;

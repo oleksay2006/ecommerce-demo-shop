@@ -7,149 +7,46 @@ section.page__wrapper
       p.page__filters-item Hoodies
       p.page__filters-item Jacket
     .page__list
-      .list__item-wrapper(
+      product-card(
         v-for="product in productsList",
-        :key="product.title"
+        :key="product.title",
+        :product="product",
+        @add-to-favourite="addToFavourite",
+        @remove-from-favourite="removeFromFavourite",
+        @toggle-product-gallery="toggleProductGallery",
+        @add-to-cart="addToCart"
       )
-        span.list__item-sale(v-if="product.isOnSale") SALE
-        span.list__item-hot(v-if="product.isHot") HOT
-        figure
-          img.list__item-image(:src="getImage(product.imgName)")
-        .hover-block
-          .hover-block__icons
-            .hover-block__favourite
-            .hover-block__search
-          .hover-block__shop
-            .hover-block__cart
-            p.hover-block__shop-text Shop Now
-        .list__item-text_wrapper
-          h3.list__item-text_title {{ product.title }}
-          .list__item-text_bottom
-            p.list__item-text--gray {{ product.type }}
-            p.list__item-text_price {{ product.price }}
+  image-gallery(
+    :is-open="isOpenProductGallery",
+    :img-name="imgNameForGallery",
+    @close="toggleProductGallery"
+  )
 </template>
 <script lang="ts" setup>
+import { ref } from "vue";
 import { useProductsStore } from "@/store/productsStore";
+import ImageGallery from "@/components/ImageGallery.vue";
+import ProductCard from "@/components/ProductCard.vue";
 
-const { productsList } = useProductsStore();
+const { productsList, addToFavourite, removeFromFavourite, addToCart } =
+  useProductsStore();
+const isOpenProductGallery = ref<boolean>(false);
+const imgNameForGallery = ref<string>("");
 
-const getImage = (imgName: string) => {
-  return require(`@/assets/images/${imgName}.png`);
+const toggleProductGallery = (imgName?: string) => {
+  if (imgName) {
+    imgNameForGallery.value = imgName;
+  }
+  isOpenProductGallery.value = !isOpenProductGallery.value;
 };
 </script>
 <style lang="scss" scoped>
-.hover-block {
-  opacity: 0;
-  width: 100%;
-  height: 55px;
-  padding: 15px 14px;
-  position: absolute;
-  bottom: 91px;
-  background-color: var(--black);
-  transition: all 0.2s ease;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  &__shop {
-    display: flex;
-    align-items: center;
-
-    &-text {
-      font-size: 18px;
-      font-weight: 400;
-      color: var(--white);
-    }
+@keyframes shopCart {
+  50% {
+    transform: translate(50%, 50%);
   }
-
-  &__icons {
-    display: flex;
-  }
-
-  &__favourite {
-    @include icon-mask("favourite", 25px, 25px, var(--white));
-    margin-right: 21px;
-    cursor: pointer;
-  }
-
-  &__search {
-    @include icon-mask("search", 25px, 25px, var(--white));
-    cursor: pointer;
-  }
-
-  &__cart {
-    @include icon-mask("cart", 25px, 25px, var(--white));
-    margin-right: 8px;
-    cursor: pointer;
-  }
-}
-
-.list {
-  &__item {
-    &-text {
-      &_price {
-        @extend .list__item-text_title;
-        margin-bottom: 0;
-      }
-
-      &--gray {
-        font-family: "Open Sans", sans-serif;
-        font-size: 16px;
-        font-weight: 400;
-        color: rgba(0, 0, 0, 0.5);
-      }
-
-      &_bottom {
-        display: flex;
-        justify-content: space-between;
-      }
-
-      &_title {
-        font-family: "Open Sans", sans-serif;
-        font-size: 16px;
-        font-weight: 600;
-        margin-bottom: 16px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-      }
-
-      &_wrapper {
-        padding: 0 10px;
-      }
-    }
-
-    &-sale {
-      background-color: var(--black);
-      color: var(--white);
-      position: absolute;
-      top: 22px;
-      padding: 4px 12px;
-      font-family: "Open Sans", sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    &-hot {
-      @extend .list__item-sale;
-      background-color: #ff6f61;
-    }
-
-    &-image {
-      width: 100%;
-      margin-bottom: 18px;
-    }
-
-    &-wrapper {
-      position: relative;
-      width: 22%;
-
-      &:hover {
-        .hover-block {
-          opacity: 1;
-        }
-      }
-    }
+  100% {
+    transform: translate(50%, 70%);
   }
 }
 

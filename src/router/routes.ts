@@ -6,6 +6,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "Landing",
     component: () => import("../views/LandingView.vue"),
   },
+  {
+    path: "/checkout",
+    name: "Checkout",
+    component: () => import("../views/CheckoutView.vue"),
+  },
 ];
 
 export default routes;

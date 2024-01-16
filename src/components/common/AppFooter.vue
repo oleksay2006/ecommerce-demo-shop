@@ -1,7 +1,7 @@
 <template lang="pug">
 footer.footer__wrapper
   .footer
-    p.footer__text © 2022 Coral , Inc.
+    p.footer__text © 2024 Coral, Inc.
     figure
       img(src="@/assets/images/cards.png", alt="Cards")
     a.footer__to-top(href="#")
